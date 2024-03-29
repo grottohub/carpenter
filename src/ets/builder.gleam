@@ -1,7 +1,7 @@
 import gleam/erlang/atom
 import gleam/dynamic
 import gleam/list
-import gleam/option.{None, Option, Some}
+import gleam/option.{type Option, None, Some}
 import ets/internal/table_type/set as set_i
 import ets/table
 import ets/table/set
@@ -10,8 +10,8 @@ import ets/table/ordered_set
 import ets/config/write_concurrency
 import ets/config/privacy
 
-external fn new_table(name: atom.Atom, props: List(dynamic.Dynamic)) -> Nil =
-  "ets" "new"
+@external(erlang, "ets", "new")
+fn new_table(name: atom.Atom, props: List(dynamic.Dynamic)) -> Nil
 
 pub type TableBuilder(k, v) {
   TableBuilder(
@@ -116,7 +116,7 @@ pub fn build_table(builder: TableBuilder(k, v), table_type: String) -> atom.Atom
   let props = case builder.read_concurrency {
     Some(x) -> [
       #(atom.create_from_string("read_concurrency"), x)
-      |> dynamic.from,
+        |> dynamic.from,
       ..props
     ]
     _ -> props
@@ -125,7 +125,7 @@ pub fn build_table(builder: TableBuilder(k, v), table_type: String) -> atom.Atom
   let props = case builder.compressed {
     True -> [
       atom.create_from_string("compressed")
-      |> dynamic.from,
+        |> dynamic.from,
       ..props
     ]
     False -> props
@@ -134,7 +134,7 @@ pub fn build_table(builder: TableBuilder(k, v), table_type: String) -> atom.Atom
   new_table(
     name,
     props
-    |> list.map(dynamic.from),
+      |> list.map(dynamic.from),
   )
   name
 }

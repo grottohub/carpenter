@@ -1,26 +1,26 @@
 import gleam/erlang/atom
 
-pub external fn all() -> Nil =
-  "ets" "all"
+@external(erlang, "ets", "all")
+pub fn all() -> Nil
 
-pub external fn drop(table: atom.Atom) -> Nil =
-  "ets" "delete"
+@external(erlang, "ets", "delete")
+pub fn drop(table: atom.Atom) -> Nil
 
-pub external fn delete_key(table: atom.Atom, key: k) -> Nil =
-  "ets" "delete"
+@external(erlang, "ets", "delete")
+pub fn delete_key(table: atom.Atom, key: k) -> Nil
 
-pub external fn delete_all_objects(table: atom.Atom) -> Nil =
-  "ets" "delete_all_objects"
+@external(erlang, "ets", "delete_all_objects")
+pub fn delete_all_objects(table: atom.Atom) -> Nil
 
 /// TODO: Check if should be v or #(k,v)
-pub external fn delete_object(table: atom.Atom, object: v) -> Nil =
-  "ets" "delete_object"
+@external(erlang, "ets", "delete_object")
+pub fn delete_object(table: atom.Atom, object: v) -> Nil
 
-pub external fn insert(table: atom.Atom, tuple: #(k, v)) -> Nil =
-  "ets" "insert"
+@external(erlang, "ets", "insert")
+pub fn insert(table: atom.Atom, tuple: #(k, v)) -> Nil
 
-pub external fn lookup(table: atom.Atom, key: k) -> List(#(k, v)) =
-  "ets" "lookup"
+@external(erlang, "ets", "lookup")
+pub fn lookup(table: atom.Atom, key: k) -> List(#(k, v))
 
-pub external fn give_away(table: atom.Atom, pid: pid, gift_data: any) -> Nil =
-  "ets" "give_away"
+@external(erlang, "ets", "give_way")
+pub fn give_away(table: atom.Atom, pid: pid, gift_data: any) -> Nil

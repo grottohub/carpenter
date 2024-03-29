@@ -1,3 +1,4 @@
+import gleam/option.{type Option, None, Some}
 import ets/table
 import ets/internal/ets_bindings
 import ets/internal/table_type/ordered_set
@@ -15,24 +16,24 @@ pub fn table(set: OrderedSet(k, v)) -> table.Table(k, v) {
 pub fn insert(set: OrderedSet(k, v), key: k, value: v) -> OrderedSet(k, v) {
   ets_bindings.insert(
     set.table
-    |> table.name(),
+      |> table.name(),
     #(key, value),
   )
   set
 }
 
-/// Retrieve a value from the ets table. Return an error if the value could
+/// Retrieve a value from the ets table. Return an option if the value could
 /// not be found.
-pub fn lookup(set: OrderedSet(k, v), key: k) -> Result(List(#(k, v)), Nil) {
+pub fn lookup(set: OrderedSet(k, v), key: k) -> Option(List(#(k, v))) {
   case
     ets_bindings.lookup(
       set.table
-      |> table.name(),
+        |> table.name(),
       key,
     )
   {
-    [] -> Error(Nil)
-    else -> Ok(else)
+    [] -> None
+    [_, ..] as kv -> Some(kv)
   }
 }
 
@@ -40,7 +41,7 @@ pub fn lookup(set: OrderedSet(k, v), key: k) -> Result(List(#(k, v)), Nil) {
 pub fn delete(set: OrderedSet(k, v), key: k) -> OrderedSet(k, v) {
   ets_bindings.delete_key(
     set.table
-    |> table.name(),
+      |> table.name(),
     key,
   )
   set

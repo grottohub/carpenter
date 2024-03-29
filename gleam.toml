@@ -1,4 +1,4 @@
-name = "gts"
+name = "desk"
 version = "0.1.0"
 description = "Bindings for Erlang's ETS tables. Forked and updated from gts."
 target = "erlang"
