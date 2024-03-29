@@ -1,0 +1,14 @@
+name = "gts"
+version = "0.1.0"
+description = "Bindings for Erlang's ETS tables. Forked and updated from gts."
+target = "erlang"
+licences = ["MPL-2.0"]
+repository = { type = "github", user = "grottohub", repo = "desk" }
+links = [{ title = "Website", href = "https://github.com/grottohub/desk" }]
+
+[dependencies]
+gleam_stdlib = "~> 0.34 or ~> 1.0"
+gleam_erlang = "~> 0.24"
+
+[dev-dependencies]
+gleeunit = "~> 1.0"
