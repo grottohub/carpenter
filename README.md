@@ -16,7 +16,7 @@ import carpenter/table
 
 pub fn main() {
   // Set up and configure an ETS table
-  let example: set.Set(String, String) =
+  let example: table.Set(String, String) =
     table.build("table_name")
     |> table.set
     |> table.privacy(table.Private)
