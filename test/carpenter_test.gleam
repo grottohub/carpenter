@@ -1,9 +1,9 @@
 import gleam/option.{Some}
 import gleeunit
 import gleeunit/should
-import ets/builder
-import ets/table/set
-import ets/table/ordered_set
+import carpenter/builder
+import carpenter/table/set
+import carpenter/table/ordered_set
 
 pub fn main() {
   gleeunit.main()

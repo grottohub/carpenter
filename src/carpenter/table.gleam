@@ -2,7 +2,7 @@
 
 import gleam/erlang/atom
 import gleam/erlang/process
-import ets/internal/ets_bindings
+import carpenter/internal/ets_bindings
 
 pub opaque type Table(k, v) {
   Table(name: atom.Atom)

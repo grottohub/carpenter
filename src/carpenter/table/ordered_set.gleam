@@ -1,7 +1,7 @@
 import gleam/option.{type Option, None, Some}
-import ets/table
-import ets/internal/ets_bindings
-import ets/internal/table_type/ordered_set
+import carpenter/table
+import carpenter/internal/ets_bindings
+import carpenter/internal/table_type/ordered_set
 
 pub type OrderedSet(k, v) =
   ordered_set.OrderedSet(k, v)

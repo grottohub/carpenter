@@ -2,13 +2,13 @@ import gleam/erlang/atom
 import gleam/dynamic
 import gleam/list
 import gleam/option.{type Option, None, Some}
-import ets/internal/table_type/set as set_i
-import ets/table
-import ets/table/set
-import ets/internal/table_type/ordered_set as ordered_set_i
-import ets/table/ordered_set
-import ets/config/write_concurrency
-import ets/config/privacy
+import carpenter/internal/table_type/set as set_i
+import carpenter/table
+import carpenter/table/set
+import carpenter/internal/table_type/ordered_set as ordered_set_i
+import carpenter/table/ordered_set
+import carpenter/config/write_concurrency
+import carpenter/config/privacy
 
 @external(erlang, "ets", "new")
 fn new_table(name: atom.Atom, props: List(dynamic.Dynamic)) -> Nil

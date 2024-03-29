@@ -1,7 +1,7 @@
-# desk
+# carpenter 🔨
 
-[![Package Version](https://img.shields.io/hexpm/v/desk)](https://hex.pm/packages/desk)
-[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/desk/)
+[![Package Version](https://img.shields.io/hexpm/v/carpenter)](https://hex.pm/packages/carpenter)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/carpenter/)
 
 Bindings for Erlang's [ETS tables](https://www.erlang.org/doc/man/ets.html). Forked and updated from [gts](https://github.com/Lunarmagpie/gts). 
 
@@ -34,7 +34,7 @@ pub fn main() {
 This package is available on hex:
 
 ```sh
-gleam add desk
+gleam add carpenter
 ```
 
-Its documentation can be found at <https://hexdocs.pm/desk>.
+Its documentation can be found at <https://hexdocs.pm/carpenter>.
