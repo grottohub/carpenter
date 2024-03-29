@@ -154,11 +154,13 @@ fn build_table(builder: TableBuilder(k, v), table_type: String) -> atom.Atom {
   name
 }
 
+/// Specify table as a `set`
 pub fn set(builder: TableBuilder(k, v)) -> Set(k, v) {
   let table = build_table(builder, "set")
   Set(Table(table))
 }
 
+/// Specify table as an `ordered_set`
 pub fn ordered_set(builder: TableBuilder(k, v)) -> Set(k, v) {
   let table = build_table(builder, "ordered_set")
   Set(Table(table))
