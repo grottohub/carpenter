@@ -12,20 +12,35 @@ If you aren't familiar with ETS tables, [this](https://elixirschool.com/en/lesso
 
 ```gleam
 import gleam/io
-import carpenter/builder
-import carpenter/table/set
+import carpenter/table
 
 pub fn main() {
-  let set: set.Set(String, String) =
-    builder.new("table_name")
-    |> builder.set()
+  // Set up and configure an ETS table
+  let example: set.Set(String, String) =
+    table.build("table_name")
+    |> table.set
+    |> table.privacy(table.Private)
+    |> table.write_concurrency(table.AutoWriteConcurrency)
+    |> table.read_concurrency(True)
+    |> table.decentralized_counters(True)
+    |> table.compression(False)
 
-  set
-  |> set.insert("hello", "world")
+  // Insert a value
+  example
+  |> table.insert("hello", "world")
 
-  set
-  |> set.lookup("hello")
+  // Retrieve a key-value tuple
+  example
+  |> table.lookup("hello")
   |> set.debug
+
+  // Delete an object
+  example
+  |> table.delete("hello")
+
+  // Delete a table
+  example
+  |> table.drop
 }
 ```
 
