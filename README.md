@@ -12,8 +12,8 @@ If you aren't familiar with ETS tables, [this](https://elixirschool.com/en/lesso
 
 ```gleam
 import gleam/io
-import ets/builder
-import ets/table/set
+import carpenter/builder
+import carpenter/table/set
 
 pub fn main() {
   let set: set.Set(String, String) =
