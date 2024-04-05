@@ -32,7 +32,7 @@ pub fn main() {
   // Retrieve a key-value tuple
   example
   |> table.lookup("hello")
-  |> set.debug
+  |> io.debug
 
   // Delete an object
   example
