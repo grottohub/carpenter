@@ -108,7 +108,10 @@ fn write_concurrency_prop(prop: WriteConcurrency) -> dynamic.Dynamic {
   |> dynamic.from
 }
 
-fn build_table(builder: TableBuilder(k, v), table_type: String) -> atom.Atom {
+fn build_table(
+  builder: TableBuilder(k, v),
+  table_type: String,
+) -> Result(atom.Atom, Nil) {
   let name = atom.create_from_string(builder.name)
 
   let props =
@@ -151,19 +154,22 @@ fn build_table(builder: TableBuilder(k, v), table_type: String) -> atom.Atom {
     props
       |> list.map(dynamic.from),
   )
-  name
 }
 
 /// Specify table as a `set`
-pub fn set(builder: TableBuilder(k, v)) -> Set(k, v) {
-  let table = build_table(builder, "set")
-  Set(Table(table))
+pub fn set(builder: TableBuilder(k, v)) -> Result(Set(k, v), Nil) {
+  case build_table(builder, "set") {
+    Ok(t) -> Ok(Set(Table(t)))
+    Error(_) -> Error(Nil)
+  }
 }
 
 /// Specify table as an `ordered_set`
-pub fn ordered_set(builder: TableBuilder(k, v)) -> Set(k, v) {
-  let table = build_table(builder, "ordered_set")
-  Set(Table(table))
+pub fn ordered_set(builder: TableBuilder(k, v)) -> Result(Set(k, v), Nil) {
+  case build_table(builder, "ordered_set") {
+    Ok(t) -> Ok(Set(Table(t)))
+    Error(_) -> Error(Nil)
+  }
 }
 
 pub type Table(k, v) {

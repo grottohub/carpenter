@@ -25,5 +25,8 @@ pub fn lookup(table: atom.Atom, key: k) -> List(#(k, v))
 @external(erlang, "ets", "give_way")
 pub fn give_away(table: atom.Atom, pid: pid, gift_data: any) -> Nil
 
-@external(erlang, "ets", "new")
-pub fn new_table(name: atom.Atom, props: List(dynamic.Dynamic)) -> Nil
+@external(erlang, "carpenter", "new_table")
+pub fn new_table(
+  name: atom.Atom,
+  props: List(dynamic.Dynamic),
+) -> Result(atom.Atom, Nil)
