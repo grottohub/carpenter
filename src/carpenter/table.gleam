@@ -180,9 +180,9 @@ pub type Set(k, v) {
   Set(table: Table(k, v))
 }
 
-/// Insert a value into the ets table.
-pub fn insert(set: Set(k, v), key: k, value: v) -> Set(k, v) {
-  ets_bindings.insert(set.table.name, #(key, value))
+/// Insert a list of objects into the set
+pub fn insert(set: Set(k, v), objects: List(#(k, v))) -> Set(k, v) {
+  ets_bindings.insert(set.table.name, objects)
   set
 }
 

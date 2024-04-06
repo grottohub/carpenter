@@ -14,7 +14,7 @@ pub fn set_insert_test() {
     |> should.be_ok
 
   t
-  |> table.insert("hello", "world")
+  |> table.insert([#("hello", "world")])
   |> table.lookup("hello")
   |> should.equal(Some([#("hello", "world")]))
 }
@@ -26,7 +26,7 @@ pub fn set_delete_test() {
     |> should.be_ok
 
   t
-  |> table.insert(1, 2)
+  |> table.insert([#(1, 2)])
   |> table.delete(1)
   |> table.lookup(1)
   |> should.equal(None)
@@ -39,8 +39,7 @@ pub fn set_delete_all_test() {
     |> should.be_ok
 
   t
-  |> table.insert(1, 2)
-  |> table.insert(2, 3)
+  |> table.insert([#(1, 2), #(2, 3)])
   |> table.delete_all
 
   t
@@ -59,8 +58,7 @@ pub fn ordered_set_test() {
     |> should.be_ok
 
   t
-  |> table.insert(1, 2)
-  |> table.insert(2, 3)
+  |> table.insert([#(1, 2), #(2, 3)])
   |> table.lookup(1)
   |> should.equal(Some([#(1, 2)]))
 }

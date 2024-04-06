@@ -17,7 +17,7 @@ pub fn delete_all_objects(table: atom.Atom) -> Nil
 pub fn delete_object(table: atom.Atom, object: #(k, v)) -> Nil
 
 @external(erlang, "ets", "insert")
-pub fn insert(table: atom.Atom, tuple: #(k, v)) -> Nil
+pub fn insert(table: atom.Atom, tuple: List(#(k, v))) -> Nil
 
 @external(erlang, "ets", "lookup")
 pub fn lookup(table: atom.Atom, key: k) -> List(#(k, v))
