@@ -19,6 +19,22 @@ pub fn set_insert_test() {
   |> should.equal([#("hello", "world")])
 }
 
+pub fn set_insert_new_test() {
+  let t =
+    table.build("set_insert_new_test")
+    |> table.set
+    |> should.be_ok
+
+  t
+  |> table.insert([#(1, 2), #(2, 3)])
+  t
+  |> table.insert_new([#(3, 4), #(1, 3)])
+  |> should.be_false
+  t
+  |> table.insert_new([#(3, 4), #(4, 5)])
+  |> should.be_true
+}
+
 pub fn set_delete_test() {
   let t =
     table.build("delete_test")
