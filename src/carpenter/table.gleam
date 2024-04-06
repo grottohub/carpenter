@@ -181,30 +181,35 @@ pub type Set(k, v) {
 }
 
 /// Insert a list of objects into the set
-pub fn insert(set: Set(k, v), objects: List(#(k, v))) -> Set(k, v) {
+pub fn insert(set: Set(k, v), objects: List(#(k, v))) -> Nil {
   ets_bindings.insert(set.table.name, objects)
-  set
 }
 
-/// Retrieve a value from the ets table. Return an option if the value could
-/// not be found.
-pub fn lookup(set: Set(k, v), key: k) -> Option(List(#(k, v))) {
-  case ets_bindings.lookup(set.table.name, key) {
-    [] -> None
-    kv -> Some(kv)
-  }
+/// Insert a list of objects without overwriting any existing keys.
+/// 
+/// This will not insert ANY object unless ALL keys do not exist.
+pub fn insert_new(set: Set(k, v), objects: List(#(k, v))) -> Bool {
+  ets_bindings.insert_new(set.table.name, objects)
+}
+
+/// Retrieve a list of objects from the table.
+pub fn lookup(set: Set(k, v), key: k) -> List(#(k, v)) {
+  ets_bindings.lookup(set.table.name, key)
 }
 
 /// Delete all objects with key `key` from the table.
-pub fn delete(set: Set(k, v), key: k) -> Set(k, v) {
+pub fn delete(set: Set(k, v), key: k) -> Nil {
   ets_bindings.delete_key(set.table.name, key)
-  set
 }
 
 /// Delete all objects belonging to a table
-pub fn delete_all(set: Set(k, v)) -> Set(k, v) {
+pub fn delete_all(set: Set(k, v)) -> Nil {
   ets_bindings.delete_all_objects(set.table.name)
-  set
+}
+
+/// Delete an exact object from the table
+pub fn delete_object(set: Set(k, v), object: #(k, v)) -> Nil {
+  ets_bindings.delete_object(set.table.name, object)
 }
 
 /// Deletes the entire table.
@@ -215,4 +220,22 @@ pub fn drop(set: Set(k, v)) {
 /// Give the table to another process.
 pub fn give_away(set: Set(k, v), pid: process.Pid, gift_data: any) -> Nil {
   ets_bindings.give_away(set.table.name, pid, gift_data)
+}
+
+/// Returns a boolean based on the existence of a key within the table
+pub fn contains(set: Set(k, v), key: k) -> Bool {
+  ets_bindings.member(set.table.name, key)
+}
+
+/// Get a reference to an existing table
+pub fn ref(name: String) -> Result(Set(k, v), Nil) {
+  case atom.from_string(name) {
+    Ok(t) -> Ok(Set(Table(t)))
+    Error(_) -> Error(Nil)
+  }
+}
+
+/// Return and remove a list of objects with the given key
+pub fn take(set: Set(k, v), key: k) -> List(#(k, v)) {
+  ets_bindings.take(set.table.name, key)
 }

@@ -2,7 +2,7 @@ import gleam/dynamic
 import gleam/erlang/atom
 
 @external(erlang, "ets", "all")
-pub fn all() -> Nil
+pub fn all() -> List(atom.Atom)
 
 @external(erlang, "ets", "delete")
 pub fn drop(table: atom.Atom) -> Nil
@@ -19,6 +19,9 @@ pub fn delete_object(table: atom.Atom, object: #(k, v)) -> Nil
 @external(erlang, "ets", "insert")
 pub fn insert(table: atom.Atom, tuple: List(#(k, v))) -> Nil
 
+@external(erlang, "ets", "insert_new")
+pub fn insert_new(table: atom.Atom, tuple: List(#(k, v))) -> Bool
+
 @external(erlang, "ets", "lookup")
 pub fn lookup(table: atom.Atom, key: k) -> List(#(k, v))
 
@@ -30,3 +33,9 @@ pub fn new_table(
   name: atom.Atom,
   props: List(dynamic.Dynamic),
 ) -> Result(atom.Atom, Nil)
+
+@external(erlang, "ets", "member")
+pub fn member(table: atom.Atom, key: k) -> Bool
+
+@external(erlang, "ets", "take")
+pub fn take(table: atom.Atom, key: k) -> List(#(k, v))
