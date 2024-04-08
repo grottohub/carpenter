@@ -16,18 +16,18 @@ import carpenter/table
 
 pub fn main() {
   // Set up and configure an ETS table
-  let example: table.Set(String, String) =
+  let assert Ok(example) =
     table.build("table_name")
-    |> table.set
     |> table.privacy(table.Private)
     |> table.write_concurrency(table.AutoWriteConcurrency)
     |> table.read_concurrency(True)
     |> table.decentralized_counters(True)
     |> table.compression(False)
+    |> table.set
 
   // Insert a value
   example
-  |> table.insert("hello", "world")
+  |> table.insert([#("hello", "world")])
 
   // Retrieve a key-value tuple
   example
